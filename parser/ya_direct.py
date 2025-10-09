@@ -2,20 +2,17 @@ import io
 import json
 import logging
 import time
-from typing import Any
-
-from dotenv import load_dotenv
-import pandas as pd
-import requests
-from parser.constants import (
-    DEFAULT_FOLDER,
-    DEFAULT_COLUMNS_CAMPAIGN,
-    REPORT_FIELDS_DIRECT,
-    REPORT_NAME,
-    YANDEX_DIRECT_URL
-)
+from datetime import datetime as dt
+from parser.constants import (DEFAULT_COLUMNS_CAMPAIGN, DEFAULT_FOLDER,
+                              REPORT_FIELDS_DIRECT, TIME_FORMAT,
+                              YANDEX_DIRECT_URL)
 from parser.logging_config import setup_logging
 from parser.mixins import ColumnMixin, FileMixin
+from typing import Any
+
+import pandas as pd
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 setup_logging()
@@ -65,6 +62,7 @@ class YandexDirectReports(ColumnMixin, FileMixin):
         Защищенный метод.
         Получает отчет из Яндекс direct для указанного логина и периода.
         """
+        time_str = dt.now().strftime(TIME_FORMAT)
 
         headers = {
             "Authorization": "Bearer " + self.token,
@@ -80,7 +78,7 @@ class YandexDirectReports(ColumnMixin, FileMixin):
                     "DateTo": date_to
                 },
                 "FieldNames": self.report_fields,
-                "ReportName": REPORT_NAME,
+                "ReportName": f'all_reports{time_str}',
                 "ReportType": "CUSTOM_REPORT",
                 "DateRangeType": "CUSTOM_DATE",
                 "Format": "TSV",

@@ -1,21 +1,17 @@
 import datetime as dt
 import logging
 import os
-from dotenv import load_dotenv
-from parser.constants import (
-    APPMETRICA_FILENAME,
-    DATE_FORMAT,
-    DAYS_TO_GENERATE_APPMETRICA,
-    DAYS_TO_GENERATE_DIRECT,
-    DAYS_TO_GENERATE_METRICA,
-    DIRECT_FILENAME,
-    METRICA_FILENAME,
-)
+from parser.constants import (APPMETRICA_FILENAME, DATE_FORMAT,
+                              DAYS_TO_GENERATE_APPMETRICA,
+                              DAYS_TO_GENERATE_DIRECT,
+                              DAYS_TO_GENERATE_METRICA, DIRECT_FILENAME,
+                              METRICA_FILENAME)
 from parser.logging_config import setup_logging
 from parser.ya_appmetrica import YandexAppMetricaReports
 from parser.ya_direct import YandexDirectReports
 from parser.ya_metrica import YandexMetricaReports
 
+from dotenv import load_dotenv
 
 setup_logging()
 
@@ -90,4 +86,4 @@ def run(
     """Функция запуска активных методов объектов класса."""
     obj_direct.save_data(filename_data=f'{DIRECT_FILENAME}.csv')
     obj_metrica.save_data(filename_data=f'{METRICA_FILENAME}.csv')
-    # obj_appmetrica.save_data(filename_data=f'{APPMETRICA_FILENAME}.csv')
+    obj_appmetrica.save_data(filename_data=f'{APPMETRICA_FILENAME}.csv')

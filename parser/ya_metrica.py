@@ -1,17 +1,13 @@
 import logging
+from parser.constants import (DEFAULT_COLUMNS_CAMPAIGN, DEFAULT_FOLDER,
+                              METRICA_LIMIT, REPORT_FIELDS_METRICA,
+                              YANDEX_METRICA_URL)
+from parser.logging_config import setup_logging
+from parser.mixins import ColumnMixin, FileMixin
 
-from dotenv import load_dotenv
 import pandas as pd
 import requests
-from parser.logging_config import setup_logging
-from parser.constants import (
-    DEFAULT_FOLDER,
-    YANDEX_METRICA_URL,
-    METRICA_LIMIT,
-    REPORT_FIELDS_METRICA,
-    DEFAULT_COLUMNS_CAMPAIGN,
-)
-from parser.mixins import ColumnMixin, FileMixin
+from dotenv import load_dotenv
 
 setup_logging()
 load_dotenv()

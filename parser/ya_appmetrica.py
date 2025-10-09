@@ -1,20 +1,14 @@
 import datetime as dt
 import logging
-
-from dotenv import load_dotenv
-import pandas as pd
-import requests
-from parser.constants import (
-    DATE_FORMAT,
-    DAYS_BEFORE,
-    DEFAULT_COLUMNS_CAMPAIGN,
-    DEFAULT_FOLDER,
-    REPORT_FIELDS_APPMETRICA,
-    YANDEX_APPMETRICA_URL,
-    APPMETRICA_LIMIT,
-)
+from parser.constants import (APPMETRICA_LIMIT, DATE_FORMAT, DAYS_BEFORE,
+                              DEFAULT_COLUMNS_CAMPAIGN, DEFAULT_FOLDER,
+                              REPORT_FIELDS_APPMETRICA, YANDEX_APPMETRICA_URL)
 from parser.logging_config import setup_logging
 from parser.mixins import ColumnMixin, FileMixin
+
+import pandas as pd
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 setup_logging()

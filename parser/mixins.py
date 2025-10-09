@@ -1,15 +1,10 @@
 import logging
-import pandas as pd
+from parser.constants import (DEFAULT_COLUMNS_CAMPAIGN, DEFAULT_DELIMETER,
+                              DEFAULT_FOLDER, DEFAULT_VALUE, DEVICES)
+from parser.logging_config import setup_logging
 from pathlib import Path
 
-from parser.constants import (
-    DEVICES,
-    DEFAULT_DELIMETER,
-    DEFAULT_VALUE,
-    DEFAULT_COLUMNS_CAMPAIGN,
-    DEFAULT_FOLDER
-)
-from parser.logging_config import setup_logging
+import pandas as pd
 
 setup_logging()
 
@@ -40,6 +35,10 @@ class ColumnMixin:
                 lambda x: (str(x) + default_value * (
                     (len(self.columns) - 1) - str(x).count(delimeter_str)
                 )).split(delimeter_str, (len(self.columns) - 1))[i]
+                if i < len((str(x) + default_value * (
+                    (len(self.columns) - 1) - str(x).count(delimeter_str)
+                )).split(delimeter_str, (len(self.columns) - 1)))
+                else default_value
             )
         return df
 

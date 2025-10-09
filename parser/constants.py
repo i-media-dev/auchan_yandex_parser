@@ -22,11 +22,11 @@ DEFAULT_DELIMETER = '_'
 DEFAULT_VALUE = '-all'
 """Значение для подставновки в пустые ячейки по умолчанию."""
 
+TIME_FORMAT = '%H:%M:%S'
+"""Формат времени по умолчанию ('%H:%M:%S')."""
+
 DATE_FORMAT = '%Y-%m-%d'
 """Формат дат по умолчанию ('%Y-%m-%d')."""
-
-REPORT_NAME = 'all_reports1'
-"""Имя отчета по умолчанию."""
 
 DEFAULT_FOLDER = 'data'
 """Папка для сохранения .csv файлов по умолчанию."""
@@ -56,12 +56,13 @@ METRICA_LIMIT = 10000
 """Лимит выдачи данных (10000)"""
 
 DEFAULT_COLUMNS_CAMPAIGN = [
+    'Agency',
     'Geo',
-    'Site_type',
-    'Generation_method',
-    'Category',
-    'Subject',
-    'Url_type'
+    'Placement',
+    'ModelPay',
+    'Type',
+    'Generation',
+    'Targeting'
 ]
 """Поля для разбивки Campaign."""
 
@@ -98,8 +99,7 @@ CLIENT_LOGINS = [
     'imedia-auchan-rmp',
     'imedia-auchanweb'
 ]
-"""Список логинов Еаптека."""
-
+"""Список логинов Ашан."""
 
 DEVICES = {
     'pc': 'DESKTOP',
