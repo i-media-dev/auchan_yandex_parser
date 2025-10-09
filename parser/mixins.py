@@ -28,19 +28,21 @@ class ColumnMixin:
         default_value: str = DEFAULT_VALUE,
         delimeter_str: str = DEFAULT_DELIMETER
     ):
-        df = pd.DataFrame()
+        split_df = column.str.split(
+            delimeter_str,
+            n=len(self.columns)-1,
+            expand=True
+        )
 
-        for i, value in enumerate(self.columns):
-            df[value] = column.apply(
-                lambda x: (str(x) + default_value * (
-                    (len(self.columns) - 1) - str(x).count(delimeter_str)
-                )).split(delimeter_str, (len(self.columns) - 1))[i]
-                if i < len((str(x) + default_value * (
-                    (len(self.columns) - 1) - str(x).count(delimeter_str)
-                )).split(delimeter_str, (len(self.columns) - 1)))
-                else default_value
-            )
-        return df
+        for i in range(len(self.columns)):
+            if i >= split_df.shape[1]:
+                split_df[i] = default_value
+            else:
+                split_df[i] = split_df[i].fillna(default_value)
+        split_df = split_df.iloc[:, :len(self.columns)]
+        split_df.columns = self.columns
+
+        return split_df
 
     def _rename_columns(self, df):
         df['Devices'] = df['Device'].apply(lambda x: DEVICES.get(x.lower()))

@@ -19,7 +19,7 @@ APPMETRICA_FILENAME = 'auchan_appmetrica'
 DEFAULT_DELIMETER = '_'
 """Делиметр Campaign по умолчанию."""
 
-DEFAULT_VALUE = '-all'
+DEFAULT_VALUE = 'all'
 """Значение для подставновки в пустые ячейки по умолчанию."""
 
 TIME_FORMAT = '%H:%M:%S'
