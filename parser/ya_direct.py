@@ -197,7 +197,7 @@ class YandexDirectReports(ColumnMixin, FileMixin):
             return pd.DataFrame()
 
         data = pd.concat(data_frames, ignore_index=True)
-        data['Source'] = 'yandex'
+        # data['Source'] = 'yandex'
         data['Cost'] = data['Cost'] * 1.2 / 1000000
         data = data[~data['Date'].str.contains(
             'Total',

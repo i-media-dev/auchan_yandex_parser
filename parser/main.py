@@ -1,3 +1,4 @@
+from parser.common_report import CommonReport
 from parser.constants import APPMETRICA_ID, CLIENT_LOGINS, METRICA_ID
 from parser.decorators import time_of_script
 from parser.utils import initialize_components, run
@@ -12,6 +13,8 @@ def main():
         APPMETRICA_ID,
     )
     run(direct, metrica, appmetrica)
+    ex = CommonReport()
+    ex.save_common_report()
 
 
 if __name__ == '__main__':

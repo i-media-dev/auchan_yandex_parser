@@ -30,7 +30,7 @@ class ColumnMixin:
     ):
         split_df = column.str.split(
             delimeter_str,
-            n=len(self.columns)-1,
+            n=len(self.columns) - 1,
             expand=True
         )
 

@@ -16,6 +16,9 @@ METRICA_FILENAME = 'auchan_metrica'
 APPMETRICA_FILENAME = 'auchan_appmetrica'
 """Название файла для выгрузки Яндекс appmetrica."""
 
+COMMON_FILENAME = 'auchan_common'
+"""Название файла для единого отчёта."""
+
 DEFAULT_DELIMETER = '_'
 """Делиметр Campaign по умолчанию."""
 
