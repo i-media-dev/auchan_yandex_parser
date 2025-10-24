@@ -26,10 +26,10 @@ class ColumnMixin:
         self,
         column,
         default_value: str = DEFAULT_VALUE,
-        delimeter_str: str = DEFAULT_DELIMETER
+        delimiter_str: str = DEFAULT_DELIMETER
     ):
         split_df = column.str.split(
-            delimeter_str,
+            delimiter_str,
             n=len(self.columns) - 1,
             expand=True
         )

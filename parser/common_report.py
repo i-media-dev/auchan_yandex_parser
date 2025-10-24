@@ -13,6 +13,17 @@ class CommonReport:
     def __init__(self):
         self.df = None
 
+    def _read_files(self, file):
+        """Читает файлы отчётов разных сервисов, преобразует в DataFrame"""
+        path = self.report_folder / f'{file}.csv'
+        df = pd.read_csv(path, delimiter=';')
+
+        if any(col in df.columns for col in DEFAULT_COLUMNS_CAMPAIGN):
+            df = df.drop(columns=[col for col in DEFAULT_COLUMNS_CAMPAIGN if
+                                  col in df.columns])
+
+        return df
+
     def _concat_files(self):
         """Объединяет DF'ы в один отчёт"""
         reports_names_list = [
@@ -21,14 +32,8 @@ class CommonReport:
             # APPMETRICA_FILENAME
         ]
 
-        def read_files(file):
-            """Читает файлы отчётов разных сервисов, преобразует в DataFrame"""
-            path = self.report_folder / f'{file}.csv'
-            df = pd.read_csv(path, delimiter=';')
-            df = df.drop(columns=DEFAULT_COLUMNS_CAMPAIGN)
-            return df
-
-        collection_of_dfs = [read_files(file) for file in reports_names_list]
+        collection_of_dfs = [self._read_files(file) for file in
+                             reports_names_list]
         concat = (
             pd.concat(
                 objs=collection_of_dfs,
@@ -37,7 +42,6 @@ class CommonReport:
             .groupby(['Date', 'CampaignName', 'Device'], as_index=False)
             .sum()
         )
-        concat['Cost'] = concat['Cost'] / 1000000
 
         return concat
 
