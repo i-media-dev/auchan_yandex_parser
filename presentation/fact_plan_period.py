@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 
-class Presentation:
+class Table:
     pd.set_option('display.width', 1500)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_colwidth', None)
@@ -142,9 +142,9 @@ class Presentation:
                      f'% реализации ПЛАНА на {self.end_date_d}'])
 
 
-def main():
+def inner_main():
     """Основная логика скрипта"""
-    ex = Presentation()
+    ex = Table()
 
     # --- metrics are columns ---
     ex.fact_file()
@@ -164,4 +164,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    inner_main()
