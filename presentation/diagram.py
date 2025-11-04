@@ -14,7 +14,7 @@ class Diagram:
 
     def __init__(self, end_date='2025-10-20'):
         self.start_date = (datetime.strptime(end_date, '%Y-%m-%d').date() -
-                           timedelta(days=7*4)).strftime('%Y-%m-%d')
+                           timedelta(days=7 * 4)).strftime('%Y-%m-%d')
         self.end_date = end_date
         self.fact = None
 
@@ -54,17 +54,24 @@ class Diagram:
         self.fact['CPO'] = self.fact['Cost'] / self.fact['Transactions']
 
     def fin_format(self):
-        pass
+        self.fact.index.name = None
+
+        self.fact['Transactions'] = self.fact['Transactions'].apply(
+            lambda x: f"{float(x):.0f}"
+        )
+        self.fact['Cost'] = self.fact['Cost'].apply(
+            lambda x: f"{float(x):.2f}"
+        )
+        self.fact['CPO'] = self.fact['CPO'].apply(
+            lambda x: f"{float(x):.2f}"
+        )
 
 
-def inner_main():
+def diagram_run():
     ex = Diagram()
     ex.fact_file()
     ex.group_by_week()
     ex.set_cpo()
+    ex.fin_format()
     print(ex.fact)
-
-
-if __name__ == '__main__':
-    inner_main()
-    # add comment
+    return ex.fact

@@ -12,7 +12,7 @@ class Table:
     pd.set_option('display.max_rows', 10)
     pd.set_option('display.float_format', lambda x: '%.4f' % x)
 
-    def __init__(self, start_date='2025-10-01', end_date='2025-10-20'):
+    def __init__(self, start_date='2025-10-01', end_date='2025-10-06'):
         self.start_date = start_date
         self.end_date = end_date
         self.start_date_d = self._date_format(start_date)
@@ -142,7 +142,7 @@ class Table:
                      f'% реализации ПЛАНА на {self.end_date_d}'])
 
 
-def inner_main():
+def fact_plan_period_run():
     """Основная логика скрипта"""
     ex = Table()
 
@@ -161,7 +161,4 @@ def inner_main():
     ex.fin_format()
 
     print(ex.df)
-
-
-if __name__ == '__main__':
-    inner_main()
+    return ex.df
